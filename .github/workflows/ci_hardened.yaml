@@ -1,0 +1,11 @@
+name: CI Hardened Workflow
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - id: job1
+        run: echo Hello

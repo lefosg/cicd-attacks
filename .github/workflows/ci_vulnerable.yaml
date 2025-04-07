@@ -1,0 +1,16 @@
+name: CI Vulnerable Workflow
+
+env:
+  ACTIONS_RUNNER_DEBUG: true  # must not set this!
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - id: job1
+        run: echo Hello
+        env:
+          ACTIONS_STEP_DEBUG: true  # must not set this!
