@@ -24,12 +24,3 @@ Best practices for securing CI/CD workflows.
 
 For each platform, we have a vulnerable file and its hardened version. You can distinguish the differences in the files as the vulnerable lines are commented out.
 
-## 📁 Project Structure
-
-.
-├── app.py                  # Simple Python script
-├── .github/
-│   └── workflows/          # GitHub Actions workflows
-├── gitlab-ci.yml           # GitLab CI workflows
-└── README.md               # You're here!
-
