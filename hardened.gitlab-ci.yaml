@@ -1,0 +1,36 @@
+stages:
+  - build_image
+
+
+docker-build:
+  stage: build_image
+  image: docker:latest
+  services:
+    - name: docker:dind
+  variables:
+    DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    RUNNER_GENERATE_ARTIFACTS_METADATA: "true"
+    # Or better, simply omit these variables as they default to `false`.
+    CI_DEBUG_TRACE: "false" 
+    CI_DEBUG_SERVICES: "false"
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build -t "$DOCKER_IMAGE_NAME" .
+    - docker push "$DOCKER_IMAGE_NAME"
+    - |
+      if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
+        docker tag "$DOCKER_IMAGE_NAME" "$CI_REGISTRY_IMAGE:latest"
+        docker push "$CI_REGISTRY_IMAGE:latest"
+      fi
+  after_script:
+    - docker inspect --format '{{.Id}}' "$DOCKER_IMAGE_NAME" | sed 's/^sha256://' > img.hash
+  artifacts:
+    when: always
+    paths:
+      - img.hash
+  allow_failure: true
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      exists:
+        - Dockerfile
