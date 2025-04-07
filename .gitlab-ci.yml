@@ -1,6 +1,9 @@
 stages:
   - build_image
 
+# 2. For GitLab, the CI_JOB_TOKEN variable is automatically available in the CI/CD environment.
+# The CI_JOB_TOKEN has the same privileges as the user who triggered the pipeline.
+# So, be careful to who has acccess to the repo, and at what level. 
 
 docker-build:
   stage: build_image

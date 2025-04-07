@@ -25,6 +25,7 @@ Best practices for securing CI/CD workflows.
 For each platform, we have a vulnerable file and its hardened version. You can distinguish the differences in the files as the vulnerable lines are commented out.
 
 ## Vulnerabilities analysed:
-1. Enable Debug Logging ([GH](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/troubleshooting-workflows/enabling-debug-logging)) -> Do not enable this option since it may output sensitive logs that you do not want to be visible (e.g., env vars with their values)
+1. Enable Debug Logging ([GH](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/troubleshooting-workflows/enabling-debug-logging), [GL](https://docs.gitlab.com/ci/variables/#enable-debug-logging)) -> Do not enable this option since it may output sensitive logs that you do not want to be visible (e.g., env vars with their values)
 
-2. Always declare explicit permissions at workflow/job level. Note, the problem is not just to declare the workflow/job permissions, but also, the fact that some tokens have access on other resources.
+2. Always declare explicit permissions at workflow/job level. Note, the problem is not just to declare the workflow/job permissions, but also, the fact that some tokens have access on other resources. ([GH](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository), [GL](https://docs.gitlab.com/ci/jobs/ci_job_token/))
+
