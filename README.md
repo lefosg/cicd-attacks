@@ -27,4 +27,4 @@ For each platform, we have a vulnerable file and its hardened version. You can d
 ## Vulnerabilities analysed:
 1. Enable Debug Logging ([GH](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/troubleshooting-workflows/enabling-debug-logging)) -> Do not enable this option since it may output sensitive logs that you do not want to be visible (e.g., env vars with their values)
 
-2. Always declare explicit permissions at workflow/job level. The problem is not just to declare the workflow/job permissions, but also, the fact that some tokens have access on other resources.
+2. Always declare explicit permissions at workflow/job level. Note, the problem is not just to declare the workflow/job permissions, but also, the fact that some tokens have access on other resources.
