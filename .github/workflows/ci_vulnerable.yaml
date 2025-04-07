@@ -4,7 +4,7 @@ env:
   REGISTRY: ghcr.io
   ACTIONS_RUNNER_DEBUG: true  # 1. must not set this!
 
-# permissions: {} # 2. we should set default job permissions to none
+# permissions: {} # 2. we should set default workflow permissions to none
 
 on:
   push:
@@ -13,7 +13,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    # permissions: ... # 2. we should set job permissions here
+    # 2. we should MINIMUM set job permissions here
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
@@ -57,6 +62,7 @@ jobs:
           ACTIONS_STEP_DEBUG: true  # 1. must not set this!
 
   poutine:
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       security-events: write
