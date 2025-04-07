@@ -1,5 +1,8 @@
 name: CI Hardened Workflow
 
+env:
+  REGISTRY: ghcr.io
+
 on:
   push:
 

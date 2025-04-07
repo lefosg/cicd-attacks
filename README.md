@@ -24,3 +24,5 @@ Best practices for securing CI/CD workflows.
 
 For each platform, we have a vulnerable file and its hardened version. You can distinguish the differences in the files as the vulnerable lines are commented out.
 
+## Vulnerabilities analysed:
+1. Enable Debug Logging ([GH](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/troubleshooting-workflows/enabling-debug-logging))
