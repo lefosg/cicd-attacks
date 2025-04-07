@@ -3,12 +3,17 @@ name: CI Hardened Workflow
 env:
   REGISTRY: ghcr.io
 
+permissions: {} # 2. Default job permissions set to none
+
 on:
   push:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
 
       - name: Checkout repository

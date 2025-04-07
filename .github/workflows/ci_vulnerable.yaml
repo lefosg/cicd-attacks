@@ -2,16 +2,15 @@ name: CI Vulnerable Workflow
 
 env:
   REGISTRY: ghcr.io
-  ACTIONS_RUNNER_DEBUG: true  # must not set this!
+  ACTIONS_RUNNER_DEBUG: true  # 1. must not set this!
+
+# permissions: {} # 2. we should set default job permissions to none
 
 on:
   push:
 
 jobs:
   build:
-    permissions:
-      contents: write
-      packages: write
 
     runs-on: ubuntu-latest
     steps:
@@ -19,12 +18,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
         env:
-          ACTIONS_STEP_DEBUG: true  # must not set this!
+          ACTIONS_STEP_DEBUG: true  # 1. must not set this!
           
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.7.1
         env:
-          ACTIONS_STEP_DEBUG: true  # must not set this!
+          ACTIONS_STEP_DEBUG: true  # 1. must not set this!
 
       - name: Log into registry ghcr.io
         uses: docker/login-action@v3.4.0
@@ -34,7 +33,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: false
         env:
-          ACTIONS_STEP_DEBUG: true  # must not set this!
+          ACTIONS_STEP_DEBUG: true  # 1. must not set this!
 
       - name: Extract Docker metadata
         uses: docker/metadata-action@v5.7.0
@@ -42,7 +41,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}
         env:
-          ACTIONS_STEP_DEBUG: true  # must not set this!
+          ACTIONS_STEP_DEBUG: true  # 1. must not set this!
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6.15.0
@@ -55,4 +54,4 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
         env:
-          ACTIONS_STEP_DEBUG: true  # must not set this!
+          ACTIONS_STEP_DEBUG: true  # 1. must not set this!
